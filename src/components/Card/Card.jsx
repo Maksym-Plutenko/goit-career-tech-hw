@@ -5,7 +5,7 @@ import boypic from './boy.png';
 
 const Card = () => {
   return (
-    <>
+ 
     <div className={css.container} >
       <img className={css.logo} src={logo} alt="logo" />
       <img
@@ -22,7 +22,7 @@ const Card = () => {
         follow
       </button>
     </div>
-    </>
+
   );
 };
 
