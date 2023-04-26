@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/goit-career-tech-hw/static/css/main.814c327d.css",
-    "main.js": "/goit-career-tech-hw/static/js/main.a7ab4d5c.js",
+    "main.js": "/goit-career-tech-hw/static/js/main.b860f22f.js",
     "index.html": "/goit-career-tech-hw/index.html",
     "main.814c327d.css.map": "/goit-career-tech-hw/static/css/main.814c327d.css.map",
-    "main.a7ab4d5c.js.map": "/goit-career-tech-hw/static/js/main.a7ab4d5c.js.map"
+    "main.b860f22f.js.map": "/goit-career-tech-hw/static/js/main.b860f22f.js.map"
   },
   "entrypoints": [
     "static/css/main.814c327d.css",
-    "static/js/main.a7ab4d5c.js"
+    "static/js/main.b860f22f.js"
   ]
 }
