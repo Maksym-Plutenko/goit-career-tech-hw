@@ -12,6 +12,7 @@ export const App = () => {
   const [users, setUsers] = useState([]);
   const [page, setPage] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [isAllLoaded, setIsAllLoaded] = useState(false);
 
   const fetchContacts = async () => {
     try {
@@ -20,11 +21,16 @@ export const App = () => {
       const response = await axios.get(
         `/users?page=${newPage}&limit=${CARDS_LIMIT}`
       );
+      const data = response.data;
       // console.log(response);
       // console.log(response.data);
-      const newUsers = [...users, ...response.data];
-      setUsers(newUsers);
-      setPage(newPage);
+      if (data.length > 0) {
+        const newUsers = [...users, ...data];
+        setUsers(newUsers);
+        setPage(newPage);
+      } else {
+        setIsAllLoaded(true);
+      }
       setIsLoading(false);
     } catch (error) {
       throw new Error(error.message);
@@ -46,16 +52,22 @@ export const App = () => {
 
       <div className={css.cardset}>
         {users.map(user => (
-          <Card key={user.id} user={user}/>
+          <Card key={user.id} user={user} />
         ))}
       </div>
 
       {isLoading ? (
         <p className={css.message}>Loading...</p>
       ) : (
-        <button className={css.button} type="button" onClick={clickHandler}>
-          Load more
-        </button>
+        <>
+          {isAllLoaded ? (
+            <p className={css.message}>All pages are loaded!</p>
+          ) : (
+            <button className={css.button} type="button" onClick={clickHandler}>
+              Load more
+            </button>
+          )}
+        </>
       )}
     </div>
   );
