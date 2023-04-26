@@ -20,8 +20,8 @@ export const App = () => {
       const response = await axios.get(
         `/users?page=${newPage}&limit=${CARDS_LIMIT}`
       );
-      console.log(response);
-      console.log(response.data);
+      // console.log(response);
+      // console.log(response.data);
       const newUsers = [...users, ...response.data];
       setUsers(newUsers);
       setPage(newPage);
@@ -42,7 +42,7 @@ export const App = () => {
   return (
     <div className={css.container}>
       {/* <Card /> */}
-      <p>{page}</p>
+      {/* <p>{page}</p> */}
 
       <div className={css.cardset}>
         {users.map(user => (
