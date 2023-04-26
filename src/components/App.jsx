@@ -40,7 +40,28 @@ export const App = () => {
   };
 
   useEffect(() => {
-    fetchContacts();
+    const fetchContacts2 = async () => {
+      try {
+        setIsLoading(true);
+        const newPage = page + 1;
+        const response = await axios.get(
+          `/users?page=${newPage}&limit=${CARDS_LIMIT}`
+        );
+        const data = response.data;
+        if (data.length > 0) {
+          const newUsers = [...users, ...data];
+          setUsers(newUsers);
+          setPage(newPage);
+        } else {
+          setIsAllLoaded(true);
+        }
+        setIsLoading(false);
+      } catch (error) {
+        throw new Error(error.message);
+      }
+    };
+
+    fetchContacts2();
   }, []);
 
   return (
