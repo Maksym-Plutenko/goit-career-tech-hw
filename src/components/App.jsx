@@ -5,7 +5,7 @@ import { Card } from './Card/Card';
 
 import css from './App.module.css';
 
-axios.defaults.baseURL = 'https://644845bde7eb3378ca2b7ea5.mockapi.io/users/';
+axios.defaults.baseURL = 'https://644845bde7eb3378ca2b7ea5.mockapi.io/users';
 const CARDS_LIMIT = 3;
 
 export const App = () => {
@@ -20,16 +20,13 @@ export const App = () => {
       const response = await axios.get(
         `/users?page=${newPage}&limit=${CARDS_LIMIT}`
       );
-      // console.log(response);
-      // console.log(response.data);
+      console.log(response);
+      console.log(response.data);
       const newUsers = [...users, ...response.data];
       setUsers(newUsers);
       setPage(newPage);
       setIsLoading(false);
-      // return response.data;
     } catch (error) {
-      // return e.message;
-      // console.log(e.message);
       throw new Error(error.message);
     }
   };
@@ -49,7 +46,7 @@ export const App = () => {
 
       <div className={css.cardset}>
         {users.map(user => (
-          <Card key={user.id} />
+          <Card key={user.id} user={user}/>
         ))}
       </div>
 
