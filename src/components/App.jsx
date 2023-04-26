@@ -62,7 +62,7 @@ export const App = () => {
     };
 
     fetchContacts2();
-  }, []);
+  });
 
   return (
     <div className={css.container}>
