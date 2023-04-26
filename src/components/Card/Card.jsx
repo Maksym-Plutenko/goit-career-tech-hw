@@ -5,6 +5,7 @@ import css from './Card.module.css';
 import logo from './logo.png';
 import mainpic from './mainpic.png';
 import boypic from './boy.png';
+import circle from './circle.png';
 import {formatNumber} from '../../utilites/formatNumber';
 
 axios.defaults.baseURL = 'https://644845bde7eb3378ca2b7ea5.mockapi.io/users';
@@ -72,7 +73,8 @@ const Card = ({ user }) => {
         alt="check mark and question mark"
       />
       <div className={css.middleline}>
-        <img className={css.boy} src={boypic} alt="boy" />
+        <img className={css.frontImg} src={user.avatar || boypic} alt={user.user} />
+        <img className={css.circle} src={circle} alt="circle" />
       </div>
       <p className={css.tweets}>{user.tweets} tweets</p>
       <p className={css.followers}>{formatNumber(followers)} followers</p>
