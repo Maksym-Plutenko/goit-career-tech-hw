@@ -13,38 +13,39 @@ export const App = () => {
   const [page, setPage] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
-  // const url = new URL('https://PROJECT_TOKEN.mockapi.io/users/1/tasks');
-  // console.log(url);
-  // url.searchParams.append('title', 'hello');
-  // console.log(url);
+  const fetchContacts = async () => {
+    try {
+      setIsLoading(true);
+      const newPage = page + 1;
+      const response = await axios.get(
+        `/users?page=${newPage}&limit=${CARDS_LIMIT}`
+      );
+      // console.log(response);
+      // console.log(response.data);
+      const newUsers = [...users, ...response.data];
+      setUsers(newUsers);
+      setPage(newPage);
+      setIsLoading(false);
+      // return response.data;
+    } catch (error) {
+      // return e.message;
+      // console.log(e.message);
+      throw new Error(error.message);
+    }
+  };
+
+  const clickHandler = evt => {
+    fetchContacts();
+  };
 
   useEffect(() => {
-    const fetchContacts = async () => {
-      try {
-        setIsLoading(true);
-        const response = await axios.get(`/users?page=1&limit=${CARDS_LIMIT}`);
-        console.log(response);
-        console.log(response.data);
-        setUsers(response.data);
-        setPage(page + 1);
-        setIsLoading(false);
-        // return response.data;
-      } catch (error) {
-        // return e.message;
-        // console.log(e.message);
-        throw new Error(error.message);
-      }
-    };
-
     fetchContacts();
-    // console.log('opanki');
-    // console.log(users);
   }, []);
 
   return (
     <div className={css.container}>
       {/* <Card /> */}
-      {/* <p>{page}</p> */}
+      <p>{page}</p>
 
       <div className={css.cardset}>
         {users.map(user => (
@@ -52,9 +53,13 @@ export const App = () => {
         ))}
       </div>
 
-      {isLoading ? <p>Loading...</p> : <button className={css.button} type="button">Load more</button>}
-
-      {/* <button type='button'>Load more</button> */}
+      {isLoading ? (
+        <p className={css.message}>Loading...</p>
+      ) : (
+        <button className={css.button} type="button" onClick={clickHandler}>
+          Load more
+        </button>
+      )}
     </div>
   );
 };
