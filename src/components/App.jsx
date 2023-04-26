@@ -22,8 +22,6 @@ export const App = () => {
         `/users?page=${newPage}&limit=${CARDS_LIMIT}`
       );
       const data = response.data;
-      // console.log(response);
-      // console.log(response.data);
       if (data.length > 0) {
         const newUsers = [...users, ...data];
         setUsers(newUsers);
@@ -47,9 +45,6 @@ export const App = () => {
 
   return (
     <div className={css.container}>
-      {/* <Card /> */}
-      {/* <p>{page}</p> */}
-
       <div className={css.cardset}>
         {users.map(user => (
           <Card key={user.id} user={user} />
